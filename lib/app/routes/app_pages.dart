@@ -1,4 +1,6 @@
 import 'package:get/get.dart';
+import 'package:sistem_layanan_kesehatan/app/modules/splash/splash_binding.dart';
+import 'package:sistem_layanan_kesehatan/app/modules/splash/splash_view.dart';
 
 import '../modules/home/bindings/home_binding.dart';
 import '../modules/home/views/home_view.dart';
@@ -22,6 +24,11 @@ class AppPages {
       name: _Paths.LOGIN,
       page: () => const LoginView(),
       binding: LoginBinding(),
+    ),
+    GetPage(
+      name: _Paths.SPLASH,
+      page: () => const SplashView(),
+      binding: SplashBinding(),
     ),
   ];
 }
