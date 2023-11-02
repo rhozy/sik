@@ -10,6 +10,7 @@ void main() {
       title: "Application",
       initialRoute: Routes.LOGIN,
       getPages: AppPages.routes,
+      debugShowCheckedModeBanner: false,
     ),
   );
 }
