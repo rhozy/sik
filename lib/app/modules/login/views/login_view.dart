@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:sistem_layanan_kesehatan/app/widgets/custom_text.dart';
+import 'package:sistem_layanan_kesehatan/app/widgets/custom_textfield.dart';
 import '../controllers/login_controller.dart';
 
 class LoginView extends GetView<LoginController> {
@@ -8,61 +10,99 @@ class LoginView extends GetView<LoginController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Column(
+      resizeToAvoidBottomInset: false,
+      body: _renderBody()
+    );
+  }
+
+  Padding _renderBody() {
+    return Padding(
+      padding: const EdgeInsets.only(
+        top: 60,
+        bottom: 30,
+        left: 30,
+        right: 30,
+      ),
+      child: Form(
+        key: controller.formKey,
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const SizedBox(
-              height: 60,
+            Center(
+              child: Image.asset("assets/image/login.png"),
             ),
-            Image.asset("assets/image/login.png",
-            ),
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-              Text(
-              "Hallo! Feri dan rozy",
-              style: TextStyle(color: Colors.black, fontSize: 30),
-            ),
-            Text("Selamat datang di aplikasi resmi"),
-            Text("Sistem Informasi Publik Layanan Kesehatan"),
-              ],
-            ),
-            Column(
-              children: [
-                SizedBox(height: 36),
-                Text('Username'),
-                TextField(
-              keyboardType: TextInputType.emailAddress,
-              style: TextStyle(color: Colors.black), // Changed text color
-              decoration: InputDecoration(
-                border: OutlineInputBorder(
-                  borderSide: BorderSide(color: Colors.blue),
-                  borderRadius: BorderRadius.all(Radius.circular(70)), // Reduced the radius
-                ),
-              ),
-            ),
-            Text('Password'),
-            TextField(
-              obscureText: true,
-              style: TextStyle(color: Colors.black), // Changed text color
-              decoration: InputDecoration(
-                border: OutlineInputBorder(
-                  borderSide: BorderSide(color: Colors.blue),
-                  borderRadius: BorderRadius.all(Radius.circular(70)), // Reduced the radius
-                ),
-              ),
-            ),
-            SizedBox(height: 20), // Added some spacing
-            ElevatedButton(
-              onPressed: () {
-                // Add your login logic here
-              },
-              child:Text('Login'),
-            ),
-              ],
-            )
-              
+            _renderLandingText(),
+            const SizedBox(height: 30),
+            CustomTextfield(label: "Username", controller: controller.usernameText),
+            const SizedBox(height: 15),
+            CustomTextfield(label: "Password", controller: controller.passwordText, isPassword: true),
+            const SizedBox(height: 30),
+            _renderButton("Masuk", controller.onTapLogin),
+            const SizedBox(height: 15),
+            _renderButton("Daftar", (){}),
+            const SizedBox(height: 15),
+            _renderTextButton(),
           ],
         ),
+      ),
+    );
+  }
+
+  Center _renderTextButton() {
+    return Center(
+          child: InkWell(
+            onTap: (){},
+            child: const CustomText(
+              text: "Lupa Password",
+              fontColor: Colors.cyan,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+        );
+  }
+
+  Column _renderLandingText() {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: const [
+        CustomText(
+          text: "Hallo!",
+          fontSize: 24,
+          fontWeight: FontWeight.bold,
+        ),
+        SizedBox(height: 12),
+        CustomText(
+          text: "Selamat datang di aplikasi resmi",
+          fontSize: 16,
+        ),
+        SizedBox(height: 5),
+        CustomText(
+          text: "Sistem Informasi Publik Layanan Kesehatan",
+          fontSize: 16,
+          fontWeight: FontWeight.bold,
+        ),
+      ],
+    );
+  }
+
+  Widget _renderButton(String text, VoidCallback onTap) {
+    return InkWell(
+      onTap: onTap,
+      child: Row(
+        children: [
+          Expanded(
+            child: Container(
+              alignment: Alignment.center,
+              padding: const EdgeInsets.all(10),
+              decoration: BoxDecoration(
+                gradient: LinearGradient(colors: [Colors.cyan.shade600, Colors.cyan.shade300]),
+                borderRadius: BorderRadius.circular(20)
+              ),
+              child: CustomText(text: text, fontSize: 20),
+            ),
+          ),
+        ],
+      ),
     );
   }
 }

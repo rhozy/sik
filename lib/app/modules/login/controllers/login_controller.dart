@@ -1,23 +1,15 @@
+import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
+import 'package:sistem_layanan_kesehatan/app/routes/app_pages.dart';
 
 class LoginController extends GetxController {
-  //TODO: Implement LoginController
+  final usernameText = TextEditingController();
+  final passwordText = TextEditingController();
+  final formKey = GlobalKey<FormState>();
 
-  final count = 0.obs;
-  @override
-  void onInit() {
-    super.onInit();
+  void onTapLogin() {
+    if (formKey.currentState!.validate()) {
+      Get.toNamed(Routes.HOME);
+    }
   }
-
-  @override
-  void onReady() {
-    super.onReady();
-  }
-
-  @override
-  void onClose() {
-    super.onClose();
-  }
-
-  void increment() => count.value++;
 }
